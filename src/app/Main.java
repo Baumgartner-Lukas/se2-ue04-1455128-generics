@@ -11,12 +11,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-//        EntryBasedMap<String, Integer> shoppingList = new EntryBasedMap<>();
-//        shoppingList.put("Apple", 2);
-//        shoppingList.put("Banana", 3);
-//        shoppingList.put("Kiwi", 1);
-//        shoppingList.put("Apple", 7);
-//        shoppingList.remove("Banana");
         // TODO: Create shoppingList
         EntryBasedMap<String, Integer> shoppingList = new EntryBasedMap<>();
         System.out.println("---------------------------------------------------");
