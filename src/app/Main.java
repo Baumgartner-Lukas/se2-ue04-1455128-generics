@@ -1,6 +1,5 @@
 package app;
 
-import collections.ArrayList;
 import collections.EntryBasedMap;
 import inout.In;
 import inout.Out;

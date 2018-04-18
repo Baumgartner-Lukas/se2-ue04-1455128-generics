@@ -8,11 +8,11 @@ public final class ArrayList<T> implements List<T>, Iterable<T> {
     private static final int DEFAULT_SIZE = 20;
     private int size = 0;
 
-    public ArrayList() {
+    ArrayList() {
         this(DEFAULT_SIZE);
     }
 
-    public ArrayList(int size) {
+    ArrayList(int size) {
         data = new Object[size];
     }
 
