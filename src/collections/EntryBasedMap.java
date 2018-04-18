@@ -21,7 +21,11 @@ public final class EntryBasedMap<K, V> implements Map<K, V> {
     @Override
     public void put(K key, V value) {
         if (contains(key)) {
-
+            for(int i = 0;i < size; i++){
+                if(data.get(i).getKey().equals(key)){
+                    data.get(i).setValue(value);
+                }
+            }
         } else {
             data.add(new Entry<>(key, value));
             size++;
@@ -68,6 +72,13 @@ public final class EntryBasedMap<K, V> implements Map<K, V> {
      */
     @Override
     public boolean remove(K key) {
+        for(Entry e : data){
+            if(e.getKey().equals(key)){
+                data.remove(e);
+                size--;
+                return true;
+            }
+        }
         return false;
     }
 
@@ -89,23 +100,21 @@ public final class EntryBasedMap<K, V> implements Map<K, V> {
     @Override
     public Iterator<K> keyIterator() {
         return new Iterator<K>() {
-            private Object current;
-            private int i;
+            private int keyIndex;
 
             {
-                current = data.get(i).getKey();
+                keyIndex = 0;
             }
 
             @Override
             public boolean hasNext() {
-                return size != 0;
+                return size() != keyIndex;
             }
 
             @Override
             public K next() {
                 if(hasNext()){
-                    current = data.get(i++).getKey();
-                    return (K)current;
+                    return data.get(keyIndex++).getKey();
                 }else{
                     throw new NoSuchElementException("No more elements");
                 }
@@ -121,22 +130,20 @@ public final class EntryBasedMap<K, V> implements Map<K, V> {
     @Override
     public Iterator<V> valueIterator() {
         return new Iterator<V>() {
-            private Object current;
-            private int i;
+            private int valueIndex;
 
             {
-                current = data.get(i).getValue();
+                valueIndex = 0;
             }
             @Override
             public boolean hasNext() {
-                return size != 0;
+                return size() != valueIndex;
             }
 
             @Override
             public V next() {
                 if(hasNext()){
-                    current = data.get(i++).getValue();
-                    return (V) current;
+                    return data.get(valueIndex++).getValue();
                 }else{
                     throw new NoSuchElementException("No more elements");
                 }
@@ -152,23 +159,20 @@ public final class EntryBasedMap<K, V> implements Map<K, V> {
     @Override
     public Iterator<Tuple<K, V>> iterator() {
         return new Iterator<Tuple<K, V>>() {
-            private Tuple current;
-            private int i = 0;
-
+            private int tupleIndex;
             {
-                current = data.get(i);
+                tupleIndex = 0;
             }
 
             @Override
             public boolean hasNext() {
-                return size != 0;
+                return size() != tupleIndex;
             }
 
             @Override
             public Tuple<K, V> next() {
                 if (hasNext()) {
-                    current = data.get(i++);
-                    return current;
+                    return data.get(tupleIndex++);
                 } else {
                     throw new NoSuchElementException("No more elements");
                 }
@@ -203,6 +207,15 @@ public final class EntryBasedMap<K, V> implements Map<K, V> {
         @Override
         public V getValue() {
             return this.value;
+        }
+
+        private void setValue(V value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return String.format(key + " -> " + value + "\n");
         }
     }
 }

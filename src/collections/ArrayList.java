@@ -60,8 +60,8 @@ public final class ArrayList<T> implements List<T>, Iterable<T> {
             for (int i = 0; i < size; i++) {
                 if (data[i].equals(elem)) {
                     data[i] = null;
-                    size--;
                     format();
+                    size--;
                     return true;
                 }
             }
@@ -122,11 +122,10 @@ public final class ArrayList<T> implements List<T>, Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
-            private Object current;
-            private int i = 0;
+            private int index;
 
             {
-                current = data[i];
+                index = 0;
             }
 
             /**
@@ -138,7 +137,7 @@ public final class ArrayList<T> implements List<T>, Iterable<T> {
              */
             @Override
             public boolean hasNext() {
-                return current != null;
+                return size() != index;
             }
 
 
@@ -150,9 +149,8 @@ public final class ArrayList<T> implements List<T>, Iterable<T> {
              */
             @Override
             public T next() {
-                if (current != null) {
-                    current = data[++i];
-                    return (T) current;
+                if (hasNext()) {
+                    return (T)data[index++];
                 } else {
                     throw new NoSuchElementException("No more elements in this list");
                 }
