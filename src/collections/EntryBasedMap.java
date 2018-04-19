@@ -71,6 +71,7 @@ public final class EntryBasedMap<K, V> implements Map<K, V> {
      * @return True if an entry has been removed, otherwise false
      */
     @Override
+    @SuppressWarnings("unchecked")
     public boolean remove(K key) {
         for(Entry e : data){
             if(e.getKey().equals(key)){

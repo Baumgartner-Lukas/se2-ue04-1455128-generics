@@ -12,7 +12,7 @@ public final class ArrayList<T> implements List<T>, Iterable<T> {
         this(DEFAULT_SIZE);
     }
 
-    ArrayList(int size) {
+    private ArrayList(int size) {
         data = new Object[size];
     }
 
@@ -41,6 +41,7 @@ public final class ArrayList<T> implements List<T>, Iterable<T> {
      * @return The object at index i or null if the index is invalid
      */
     @Override
+    @SuppressWarnings("unchecked")
     public T get(int i) {
         if (i < 0 || i > size) {
             throw new RuntimeException("Invalid index");
@@ -110,7 +111,7 @@ public final class ArrayList<T> implements List<T>, Iterable<T> {
      *
      * @return length of data
      */
-    public int length() {
+    int length() {
         return data.length;
     }
 
